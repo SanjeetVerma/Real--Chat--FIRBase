@@ -21,9 +21,9 @@
 		9033ACB21ECECFF500D7DD2F /* FireBaseChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9033ACB11ECECFF500D7DD2F /* FireBaseChatTests.swift */; };
 		9033ACBD1ECECFF500D7DD2F /* FireBaseChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9033ACBC1ECECFF500D7DD2F /* FireBaseChatUITests.swift */; };
 		9033ACCB1ECED01300D7DD2F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9033ACCA1ECED01300D7DD2F /* LoginViewController.swift */; };
-		9033ACCD1ECEF3B000D7DD2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9033ACCC1ECEF3B000D7DD2F /* GoogleService-Info.plist */; };
 		904B9ADC1ED5532B00F3834A /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904B9ADB1ED5532B00F3834A /* ChatMessageCell.swift */; };
 		9063D2F01ED449C80064F05D /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9063D2EF1ED449C80064F05D /* UserCell.swift */; };
+		906CE8ED1F1F754700B94371 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 906CE8EC1F1F754700B94371 /* GoogleService-Info.plist */; };
 		9088E3861ED067260016485C /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088E3851ED067260016485C /* NewMessageController.swift */; };
 		9088E3891ED0719D0016485C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9088E3881ED0719D0016485C /* User.swift */; };
 		C428A5609932505B1E3E983A /* Pods_FireBaseChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1C74CA0C47B1F94F4B99BC /* Pods_FireBaseChat.framework */; };
@@ -72,9 +72,10 @@
 		9033ACBC1ECECFF500D7DD2F /* FireBaseChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseChatUITests.swift; sourceTree = "<group>"; };
 		9033ACBE1ECECFF500D7DD2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9033ACCA1ECED01300D7DD2F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		9033ACCC1ECEF3B000D7DD2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9035245E1F21E1BE00249894 /* FireBaseChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FireBaseChat.entitlements; sourceTree = "<group>"; };
 		904B9ADB1ED5532B00F3834A /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		9063D2EF1ED449C80064F05D /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		906CE8EC1F1F754700B94371 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9088E3851ED067260016485C /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		9088E3881ED0719D0016485C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C785A194E5CD57807F195828 /* Pods-FireBaseChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireBaseChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FireBaseChat/Pods-FireBaseChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		9033AC9B1ECECFF500D7DD2F /* FireBaseChat */ = {
 			isa = PBXGroup;
 			children = (
+				9035245E1F21E1BE00249894 /* FireBaseChat.entitlements */,
 				9063D2EE1ED449800064F05D /* View */,
 				9017513F1ED2BEAE0063A0B6 /* Helpers */,
 				9088E3871ED071850016485C /* Model */,
@@ -178,7 +180,7 @@
 				9033ACA31ECECFF500D7DD2F /* Assets.xcassets */,
 				9033ACA51ECECFF500D7DD2F /* LaunchScreen.storyboard */,
 				9033ACA81ECECFF500D7DD2F /* Info.plist */,
-				9033ACCC1ECEF3B000D7DD2F /* GoogleService-Info.plist */,
+				906CE8EC1F1F754700B94371 /* GoogleService-Info.plist */,
 			);
 			path = FireBaseChat;
 			sourceTree = "<group>";
@@ -296,7 +298,13 @@
 				TargetAttributes = {
 					9033AC981ECECFF500D7DD2F = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 6ZZ2TZYRP6;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					9033ACAC1ECECFF500D7DD2F = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -336,9 +344,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9033ACA71ECECFF500D7DD2F /* LaunchScreen.storyboard in Resources */,
-				9033ACCD1ECEF3B000D7DD2F /* GoogleService-Info.plist in Resources */,
 				9033ACA41ECECFF500D7DD2F /* Assets.xcassets in Resources */,
 				9033ACA21ECECFF500D7DD2F /* Main.storyboard in Resources */,
+				906CE8ED1F1F754700B94371 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,7 +595,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Herz (TS6P232M6P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Paul Herz (TS6P232M6P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -637,7 +646,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Herz (TS6P232M6P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Paul Herz (TS6P232M6P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -664,11 +674,15 @@
 			baseConfigurationReference = C785A194E5CD57807F195828 /* Pods-FireBaseChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_ENTITLEMENTS = FireBaseChat/FireBaseChat.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Herz (TS6P232M6P)";
+				DEVELOPMENT_TEAM = 6ZZ2TZYRP6;
 				INFOPLIST_FILE = FireBaseChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.acquaintsoft.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldoceanwinds.stoked;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "18ceb25f-88a3-4377-a3a6-75da2b401f08";
+				PROVISIONING_PROFILE_SPECIFIER = windappdevelopment;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -678,11 +692,15 @@
 			baseConfigurationReference = 036B7991ECBBA611812B8893 /* Pods-FireBaseChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_ENTITLEMENTS = FireBaseChat/FireBaseChat.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Herz (TS6P232M6P)";
+				DEVELOPMENT_TEAM = 6ZZ2TZYRP6;
 				INFOPLIST_FILE = FireBaseChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.acquaintsoft.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldoceanwinds.stoked;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "18ceb25f-88a3-4377-a3a6-75da2b401f08";
+				PROVISIONING_PROFILE_SPECIFIER = windappdevelopment;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

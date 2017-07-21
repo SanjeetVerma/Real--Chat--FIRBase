@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
-class LoginViewController: UIViewController {
+import FBSDKLoginKit
+class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
 
     var messageController:MessageController?
+    var dictionary:[String:AnyObject]!
     let inputContainerView:UIView = {
     
         let view = UIView()
@@ -30,6 +32,15 @@ class LoginViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleLoginRegister), for:.touchUpInside)
+        return button
+    }()
+    
+    lazy var facebookloginButton:UIButton = {
+    
+        let button = FBSDKLoginButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.delegate = self
+        button.readPermissions = ["email","public_profile","user_friends"]
         return button
     }()
     
@@ -139,11 +150,13 @@ class LoginViewController: UIViewController {
         view.addSubview(loginRegisterButton)
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
-        
+        view.addSubview(facebookloginButton)
         setupinputContainerView()
         setuploginRegisterButton()
         setupProfileimageView()
         setuploginRegisterSegmentedControl()
+        
+        setupFacebookloginButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -225,6 +238,17 @@ class LoginViewController: UIViewController {
         loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    func setupFacebookloginButton(){
+        
+        //need x,y,width,height
+        
+        facebookloginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        facebookloginButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 12).isActive = true
+        facebookloginButton.widthAnchor.constraint(equalTo: loginRegisterButton.widthAnchor).isActive = true
+        facebookloginButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+    }
+    
     func setupProfileimageView(){
         
         //need x,y,width,height
@@ -257,7 +281,7 @@ class LoginViewController: UIViewController {
             
             if error != nil{
             
-                print("Error while login with user email - \(error?.localizedDescription)")
+                print("Error while login with user email - \(error)")
                 return
             }else{
             
@@ -266,6 +290,7 @@ class LoginViewController: UIViewController {
             }
         })
     }
+    
     
     func setuploginRegisterSegmentedControl(){
         
@@ -276,6 +301,93 @@ class LoginViewController: UIViewController {
         loginRegisterSegmentedControl.widthAnchor.constraint(equalTo: inputContainerView.widthAnchor,multiplier:1).isActive = true
         loginRegisterSegmentedControl.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
+    
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+        print("Did logout from facebook")
+    }
+    
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error != nil{
+        
+            print("Error while login with facebook:\(error)")
+            return
+        }
+        else
+        {
+            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields":"id,name,email,picture.type(large)"]).start(completionHandler: { (connection, result, err) in
+                
+                if err != nil
+                {
+                    print("Failded to start Graph request",err!)
+                    return
+                }else
+                {
+                    var imagedata = Data()
+                    self.dictionary = result as! [String : AnyObject]
+                    let name = self.dictionary["name"] as!String
+                    let email = self.dictionary["email"] as! String
+                    if let data1 = self.dictionary["picture"]
+                    {
+                        if let data = data1["data"] as? [String:AnyObject]
+                        {
+                            let url = data["url"] as! String
+                            do
+                            {
+                                imagedata = try Data.init(contentsOf: URL(string: url)!)
+                                
+                            }catch let error as NSError{
+                            
+                                print("Error:\(error)")
+                            }
+                            
+                        }
+                    }
+                    
+                    guard let accessToken = FBSDKAccessToken.current().tokenString else {
+                        return
+                    }
+                    let credentials = FIRFacebookAuthProvider.credential(withAccessToken: accessToken)
+                    
+                    FIRAuth.auth()?.signIn(with: credentials, completion: { (user, error) in
+                        
+                        if error != nil
+                        {
+                        
+                            print("Failed login with Firebase:\(error?.localizedDescription)")
+                            return
+                        }
+                        else
+                        {
+                            guard let uid = user?.uid else{
+                                print("UId not available")
+                                return
+                            }
+                            let imageName = UUID().uuidString
+                            let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageName).jpg")
+                                storageRef.put(imagedata, metadata: nil, completion: { (metaData, error) in
+                                    
+                                    if error != nil{
+                                        
+                                        print("Error while storage the image into firebase -\(error?.localizedDescription)")
+                                        return
+                                    }
+                                    
+                                    if let profileImageUrl = metaData?.downloadURL()?.absoluteString{
+                                        
+                                        let values = ["name":name,"email":email,"profileImageUrl":profileImageUrl]
+                                        self.registerUserIntoDatabaseWithUID(uid: uid, values: values as [String : AnyObject])
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        }
 }
 
 extension UIColor{

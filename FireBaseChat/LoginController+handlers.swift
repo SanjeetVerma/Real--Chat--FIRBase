@@ -55,7 +55,7 @@ extension LoginViewController :UIImagePickerControllerDelegate,UINavigationContr
         })
     }
     
-    private func registerUserIntoDatabaseWithUID(uid:String,values:[String:AnyObject]){
+    public func registerUserIntoDatabaseWithUID(uid:String,values:[String:AnyObject]){
     
         //let ref = FIRDatabase.database().reference(fromURL: "https://fir-chat-bcd30.firebaseio.com/")
          let ref = FIRDatabase.database().reference()

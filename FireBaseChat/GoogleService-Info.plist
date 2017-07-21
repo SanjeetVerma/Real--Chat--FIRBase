@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>96375459595-tbjmfdhqg52730b7eu1spuvbted7fqc5.apps.googleusercontent.com</string>
+	<string>973524881810-3cpm1u81hmlm7sm1ib8gg3n82fga4nl6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.96375459595-tbjmfdhqg52730b7eu1spuvbted7fqc5</string>
+	<string>com.googleusercontent.apps.973524881810-3cpm1u81hmlm7sm1ib8gg3n82fga4nl6</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAqS2zS-BzmrsQe_ec7PtcKA8-roalWrCI</string>
+	<string>AIzaSyBxaZUwNJSy0YJ8j5jS06O47Xjw9iXFkJ8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>96375459595</string>
+	<string>973524881810</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.acquaintsoft.demo</string>
+	<string>com.worldoceanwinds.stoked</string>
 	<key>PROJECT_ID</key>
-	<string>fir-chat-bcd30</string>
+	<string>fir-chatexample-43f17</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fir-chat-bcd30.appspot.com</string>
+	<string>fir-chatexample-43f17.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:96375459595:ios:43cc6a2928431280</string>
+	<string>1:973524881810:ios:f0bc5779e2886469</string>
 	<key>DATABASE_URL</key>
-	<string>https://fir-chat-bcd30.firebaseio.com</string>
+	<string>https://fir-chatexample-43f17.firebaseio.com</string>
 </dict>
 </plist>

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 class MessageController: UITableViewController {
     
     var cellId = "cellId"
@@ -309,6 +310,8 @@ class MessageController: UITableViewController {
         
         do{
             try FIRAuth.auth()?.signOut()
+             FBSDKLoginManager().logOut()
+            
         }catch let logouterror{
             
             print(logouterror)
