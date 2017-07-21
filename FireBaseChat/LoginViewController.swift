@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
-class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
+import GoogleSignIn
+class LoginViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInUIDelegate {
 
     var messageController:MessageController?
     var dictionary:[String:AnyObject]!
@@ -42,6 +43,13 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
         button.delegate = self
         button.readPermissions = ["email","public_profile","user_friends"]
         return button
+    }()
+    
+    lazy var googleSigninButton: GIDSignInButton = {
+    
+        let googlebutton = GIDSignInButton()
+        googlebutton.translatesAutoresizingMaskIntoConstraints = false
+        return googlebutton
     }()
     
     let nameTextField:UITextField = {
@@ -144,6 +152,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        GIDSignIn.sharedInstance().uiDelegate = self
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         
         view.addSubview(inputContainerView)
@@ -151,12 +160,15 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
         view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
         view.addSubview(facebookloginButton)
+        view.addSubview(googleSigninButton)
+        
         setupinputContainerView()
         setuploginRegisterButton()
         setupProfileimageView()
         setuploginRegisterSegmentedControl()
-        
         setupFacebookloginButton()
+        setupGoogleSigninButton()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -245,8 +257,17 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
         facebookloginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         facebookloginButton.topAnchor.constraint(equalTo: loginRegisterButton.bottomAnchor, constant: 12).isActive = true
         facebookloginButton.widthAnchor.constraint(equalTo: loginRegisterButton.widthAnchor).isActive = true
-        facebookloginButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        facebookloginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+    }
+    
+    
+    func setupGoogleSigninButton(){
+        
+        googleSigninButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        googleSigninButton.topAnchor.constraint(equalTo: facebookloginButton.bottomAnchor, constant: 12).isActive = true
+        googleSigninButton.widthAnchor.constraint(equalTo: facebookloginButton.widthAnchor).isActive = true
+        googleSigninButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func setupProfileimageView(){
@@ -307,8 +328,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
         
         print("Did logout from facebook")
     }
-    
-    
+
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         
         if error != nil{
@@ -343,7 +363,6 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
                             
                                 print("Error:\(error)")
                             }
-                            
                         }
                     }
                     
@@ -388,6 +407,7 @@ class LoginViewController: UIViewController,FBSDKLoginButtonDelegate {
                 })
             }
         }
+
 }
 
 extension UIColor{

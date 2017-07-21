@@ -14,6 +14,7 @@ target 'FireBaseChat' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'GoogleSignIn'
 
   target 'FireBaseChatTests' do
     inherit! :search_paths

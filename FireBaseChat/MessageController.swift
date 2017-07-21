@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import GoogleSignIn
 class MessageController: UITableViewController {
     
     var cellId = "cellId"
@@ -296,7 +297,6 @@ class MessageController: UITableViewController {
         
         //titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
         
-        
     }
     
     func showChatControllerForUser(user:User){
@@ -311,6 +311,7 @@ class MessageController: UITableViewController {
         do{
             try FIRAuth.auth()?.signOut()
              FBSDKLoginManager().logOut()
+            GIDSignIn.sharedInstance().signOut()
             
         }catch let logouterror{
             
